@@ -47,7 +47,7 @@ def LetterToWord (text):
     list4 = text_string3.split("!")
     for element in list4:
         text_string4 += (element + " ")
-    list_return = text_string3.split(" ")
+    list_return = text_string4.split(" ")
     wordlist(list_return)
 
 
