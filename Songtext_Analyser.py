@@ -1,6 +1,8 @@
 #rule: no import re
 import os
 import requests
+import matplotlib.pyplot as plt
+import pandas as pd
 from bs4 import BeautifulSoup
 import tkinter as tk
 from tkinter import *
@@ -8,9 +10,11 @@ from tkinter import filedialog
 from tkinter import Text
 
 
-def open_file ():
+def open_file (): # next: implement PDF/txt read
     datei = filedialog.askopenfilename(initialdir="/", title="select File", filetypes=(("text", ".txt"), ("PDF", ".pdf"))) #returns filepath
     pass 
+
+
 
 def test_URL (): # next: test "no text" case
     test=str(input.get())
@@ -18,6 +22,8 @@ def test_URL (): # next: test "no text" case
         open_URL(test)
     else:
         master.quit()
+
+
 
 def open_URL (URL):
     page = requests.get(URL)
@@ -27,6 +33,7 @@ def open_URL (URL):
     print("\n\n")
     print("\n\n")
     LetterToWord(text)
+
 
 
 def LetterToWord (text):
@@ -51,6 +58,7 @@ def LetterToWord (text):
     wordlist(list_return)
 
 
+
 def wordlist (list):
     words_dic = {}
     for word in list:
@@ -61,13 +69,27 @@ def wordlist (list):
     print(words_dic)
     print("\n\n")
     print("\n\n")
-    graph(words_dic)
+    Diagram(words_dic)
 
-def graph (dic):
-    pass
 
-    
 
+def Diagram (dic):# next: delete and/the/with etc 
+    words = []
+    counter = []
+    keys = dic.keys()
+    values = dic.values()
+    for i in keys:
+        words.append(i)
+    for j in values:
+        counter.append(j)
+    counter.sort()
+    s = pd.Series(counter, index=words)
+    s.plot(kind="bar", rot=0)
+    plt.plot()
+    plt.show()
+
+
+   
 if __name__ == "__main__":
     URL = ""
     frage = "Bitte URL der Liedtextseite eingeben:"
