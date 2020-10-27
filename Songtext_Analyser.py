@@ -25,6 +25,25 @@ def test_URL (): # next: test "no text" case
 
 
 
+def dic_cleaner(dic):
+    most_common = ["the", "be", "to" , "of", "and", "a", "in", "that", "have", "I", "in", "for", "not", "on", "with", "he", "as",
+                   "you", "do", "at" , "this", "but", "his", "by", "from", "they", "we", "say", "he" , "she", "or", "an", "will",
+                   "my", "one", "all", "would","there", "their", "what", "so", "up", "out", "if", "about", "who", "get", "which",
+                   "go", "me", "when", "make", "can", "like", "no", "just", "him", "into", "your", "some", "could", "tham", "then",
+                   "than", "now", "it's", "its", "within", "is", "i'm", "am", "i", "where", "was", "them", "", "we're", "us"]
+    new_dic=dic.copy()
+    for i in dic:
+        if i in most_common:
+            del new_dic[i]
+    ac_dic=new_dic.copy()
+    for j in new_dic:
+        if dic[j] < 3:
+            del ac_dic[j] 
+    print(ac_dic)
+    Diagram(ac_dic)
+
+
+
 def open_URL (URL):
     page = requests.get(URL)
     soup = BeautifulSoup(page.content, 'lxml')
@@ -69,7 +88,7 @@ def wordlist (list):
     print(words_dic)
     print("\n\n")
     print("\n\n")
-    Diagram(words_dic)
+    dic_cleaner(words_dic)
 
 
 
@@ -82,7 +101,6 @@ def Diagram (dic):# next: delete and/the/with etc
         words.append(i)
     for j in values:
         counter.append(j)
-    counter.sort()
     s = pd.Series(counter, index=words)
     s.plot(kind="bar", rot=0)
     plt.plot()
